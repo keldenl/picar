@@ -1,5 +1,5 @@
 # Picar
-Created by  :-[@keldenl] and  :-[@eliza-huang]
+Created by  [@Keldenl](https://github.com/keldenl) and [@Eliza-Huang](https://github.com/Eliza-Huang)
 
 Photo sharing social media where you share your best moments to your closest friends.
 
