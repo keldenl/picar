@@ -1,6 +1,7 @@
 {
     "name": "picar",
     "version": "0.1.0",
+    "homepage": "https://keldenl.github.io/picar",
     "private": true,
     "license": "SEE LICENSE IN LICENSE",
     "dependencies": {
