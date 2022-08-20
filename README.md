@@ -1,4 +1,5 @@
 # Picar
+Created by  :-[@keldenl] and  :-[@eliza-huang]
 
 Photo sharing social media where you share your best moments to your closest friends.
 
