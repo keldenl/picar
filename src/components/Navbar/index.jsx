@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 import './style.css';
 
 export function Navbar({ }) {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        fetch('http://localhost:9000/profile', {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then((res) => {
+                if (res.status >= 400) {
+                    throw new Error(`${res.status} - ${res.statusText}`)
+                }
+                return res.json()
+            })
+            .then((json) => {
+                setIsAuthenticated(true);
+                setUser(json.user)
+                console.log(json);
+            }).catch((err) => {
+                console.error(err);
+            });
+    }, []);
     /**home, profile, sign out/sign in */
     return (
         <header className='sidenav'>
@@ -12,12 +34,20 @@ export function Navbar({ }) {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
-                <li>
-                    <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                    Sign out
-                </li>
+                {isAuthenticated ?
+                    <>
+                        <li>
+                            <Link to="/profile">{user.displayName}</Link>
+                        </li>
+                        <li>
+                            <a href="http://localhost:9000/logout">Sign out</a>
+                        </li>
+                    </>
+                    :
+                    <li>
+                        <a href="http://localhost:9000/google">Sign In</a>
+                    </li>
+                }
             </ul >
         </header >
     )
