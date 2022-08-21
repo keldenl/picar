@@ -13,7 +13,7 @@ export function Navbar({ }) {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    Profile
+                    <Link to="/profile">Profile</Link>
                 </li>
                 <li>
                     Sign out
