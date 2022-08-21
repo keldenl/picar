@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from '../../components/Navbar';
 import { Uploader } from '../../components/Uploader';
+import { ImageContainer } from '../../components/ImageContainer';
 import './style.css';
 
 export function Homepage({ }) {
-    const [showUploader, setShowUploader] = useState(false);
 
     return (
-        <div>
+        <div className="page">
             <Navbar />
-            <p>Homepage</p>
-            <button onClick={() => setShowUploader(true)}>Add Post</button>
-            {
-                showUploader ?
-                    <div>
-                        <Uploader/>
-                        <button onClick={() => setShowUploader(false)}>Cancel</button>
-                    </div>
-                :
-                    <></>
-            }
+            <Uploader />
+            <ImageContainer />
         </div>
     )
 }
