@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { Homepage } from './pages/Homepage';
 import { Profile } from './pages/Profile'
+import { Settings } from './pages/Settings';
 
 import './App.css';
 
@@ -20,12 +21,16 @@ function App() {
             element={<Users />}
           /> */}
           <Route
-            path="/"
-            element={<Homepage />}
-          />
-          <Route
             path="/profile"
             element={<Profile />}
+          />
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/"
+            element={<Homepage />}
           />
         </Routes>
       </div>

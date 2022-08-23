@@ -23,7 +23,7 @@ export function Navbar({ }) {
                 setUser(json.user)
                 console.log(json);
             }).catch((err) => {
-                console.error(err);
+                console.log(err);
             });
     }, []);
     /**home, profile, sign out/sign in */
@@ -37,10 +37,10 @@ export function Navbar({ }) {
                 {isAuthenticated ?
                     <>
                         <li>
-                            <Link to="/profile">{user.displayName}</Link>
+                            <Link to="/profile">{user.username}</Link>
                         </li>
                         <li>
-                            <a href="http://localhost:9000/logout">Sign out</a>
+                            <Link to="/settings">Settings</Link>
                         </li>
                     </>
                     :

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
 import { Navbar } from '../../components/Navbar';
 import './style.css';
 
@@ -6,7 +7,7 @@ export function Profile({ }) {
     useEffect(() => {
         fetch('http://localhost:9000/profile', {
             method: 'GET',
-            credentials: 'include'
+            ...DEFAULT_FETCH_CONFIG
         })
             .then((res) => {
                 if (res.status >= 400) {
