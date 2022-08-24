@@ -7,7 +7,8 @@ import './style.css';
 
 export function Uploader({ }) {
     const [showUploader, setShowUploader] = useState(false);
-    const [uploadImg, setUploadImg] = useState([])
+    const [uploadImg, setUploadImg] = useState([]);
+    const [isUploading, setIsUploading] = useState(false);
 
 
     const handleUploadImage = async (e) => {
@@ -20,6 +21,7 @@ export function Uploader({ }) {
     }
 
     const handlePostImage = () => {
+        setIsUploading(true);
         fetch('http://localhost:9000/upload', {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
@@ -33,6 +35,7 @@ export function Uploader({ }) {
             })
             .then((json) => {
                 console.log(json);
+                setIsUploading(false);
                 window.alert(`Image uploaded to ${json.username}`)
             }).catch((err) => {
                 console.log(err);
@@ -45,9 +48,9 @@ export function Uploader({ }) {
             {
                 showUploader ?
                     <div className="modal">
-                        <img alt='preview' src={uploadImg} />
+                        <img alt='preview' style={{ maxWidth: 300 }} src={uploadImg} />
                         <input type='file' onChange={handleUploadImage} />
-                        {uploadImg != null ? <button onClick={handlePostImage}>Post</button> : undefined}
+                        {uploadImg != null ? <button onClick={handlePostImage} disabled={isUploading}>{!isUploading ? 'Post' : 'Uploading'}</button> : undefined}
                         {/* <button>Upload your image here</button> */}
                         {/* <button onClick={() => setShowUploader(false)}>Cancel</button> */}
                     </div>

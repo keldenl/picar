@@ -37,7 +37,7 @@ export function Navbar({ }) {
                 {isAuthenticated ?
                     <>
                         <li>
-                            <Link to="/profile">{user.username}</Link>
+                            <Link to={`/profile/${user.username}`}>{user.username}</Link>
                         </li>
                         <li>
                             <Link to="/settings">Settings</Link>
