@@ -6,4 +6,86 @@
     transform: translate(-50%, -50%);
     min-width: 400px;
     min-height: 400px;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.rainbow {
+    border: 0;
+    height: .2rem;
+    margin: 1em auto;
+    display: block;
+    background-image: -webkit-linear-gradient( 0deg, transparent, yellow, red, pink, purple, blue, transparent );
+    clear: both;
+}
+
+.cancel-button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.add-button {
+    cursor: pointer;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.file-input {
+    color: transparent;
+}
+.file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.file-input::before {
+    content: 'Select photo';
+    color: black;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+.file-input:hover::before {
+    border-color: black;
+}
+.file-input:active {
+    outline: 0;
+}
+.file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
+.image-icon {
+    display: block;
+    margin: auto;
+}
+
+.image-uploader {
+    margin: 20px;
+    text-align: center;
+}
+
+.image-info {
+    text-align: center;
 }
