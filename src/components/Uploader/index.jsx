@@ -23,7 +23,6 @@ export function Uploader({ }) {
     }
 
     const handlePostImage = () => {
-        console.log(postDescription);
         setIsUploading(true);
         fetch('http://localhost:9000/upload', {
             ...DEFAULT_POST_CONFIG,
@@ -40,10 +39,10 @@ export function Uploader({ }) {
                 console.log(json);
                 setIsUploading(false);
                 window.alert(`Image uploaded to ${json.username}`)
+                exitImageUpload();
             }).catch((err) => {
                 console.log(err);
             });
-        exitImageUpload();
     }
 
     const exitImageUpload = () => {
