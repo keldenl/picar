@@ -7,7 +7,6 @@ import './style.css';
 export function Homepage({ }) {
     return (
         <div className="page">
-            <Navbar />
             <Uploader />
             <ImageContainer />
         </div>

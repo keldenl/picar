@@ -28,7 +28,6 @@ export function Settings({ }) {
 
     return (
         <div className="page">
-            <Navbar />
             <ul>
                 <li>
                     <input type='text' value={username} onChange={e => setUsername(e.target.value)} />

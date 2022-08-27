@@ -26,6 +26,7 @@ export function Navbar({ }) {
                 console.log(err);
             });
     }, []);
+    
     /**home, profile, sign out/sign in */
     return (
         <header className='sidenav'>

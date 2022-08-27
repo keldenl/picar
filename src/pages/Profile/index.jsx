@@ -32,7 +32,6 @@ export function Profile({ }) {
 
     return (
         <div className="page">
-            <Navbar />
             <h1>{username}</h1>
             <p>
                 Bio for {username}
@@ -42,7 +41,7 @@ export function Profile({ }) {
                     const { data, datePosted, description, entityId, likers, userId } = post;
                     console.log({ data, datePosted, description, entityId, likers, userId })
                     return (
-                        <div>
+                        <div key={entityId}>
                             <img style={{ maxWidth: 300 }} src={data} />
                             <p>{new Date(datePosted).toLocaleTimeString()}</p>
                             <p>{description}</p>

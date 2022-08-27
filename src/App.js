@@ -8,6 +8,7 @@ import {
 import { Homepage } from './pages/Homepage';
 import { Profile } from './pages/Profile'
 import { Settings } from './pages/Settings';
+import { Navbar } from './components/Navbar';
 
 import './App.css';
 
@@ -15,6 +16,8 @@ function App() {
   return (
     <Router basename="/picar">
       <div className="App">
+        <Navbar />
+
         <Routes>
           {/* <Route
             path="/users"
