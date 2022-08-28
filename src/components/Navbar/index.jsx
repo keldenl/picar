@@ -41,6 +41,9 @@ export function Navbar({ }) {
                             <Link to={`/profile/${user.username}`}>{user.username}</Link>
                         </li>
                         <li>
+                            <Link to="/requests">Friend Requests</Link>
+                        </li>
+                        <li>
                             <Link to="/settings">Settings</Link>
                         </li>
                     </>

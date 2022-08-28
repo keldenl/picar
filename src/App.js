@@ -5,10 +5,11 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { Navbar } from './components/Navbar';
 import { Homepage } from './pages/Homepage';
 import { Profile } from './pages/Profile'
 import { Settings } from './pages/Settings';
-import { Navbar } from './components/Navbar';
+import { Requests } from './pages/Requests';
 
 import './App.css';
 
@@ -26,6 +27,10 @@ function App() {
           <Route
             path="/profile/:username"
             element={<Profile />}
+          />
+          <Route
+            path="/requests"
+            element={<Requests />}
           />
           <Route
             path="/settings"

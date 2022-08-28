@@ -25,7 +25,7 @@ export function Uploader({ }) {
         fetch('http://localhost:9000/upload', {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
-            body: JSON.stringify({ uploadImg })
+            body: JSON.stringify({ uploadImg, description: 'test' })
         })
             .then((res) => {
                 if (res.status >= 400) {

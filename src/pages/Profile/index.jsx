@@ -55,7 +55,7 @@ export function Profile({ }) {
     return (
         <div className="page">
             <h1>{username}</h1>
-            <button onClick={handleFriendRequest}>Add friend</button>
+            <button onClick={handleFriendRequest} disabled={isSendingRequest}>Add friend</button>
             <p>
                 Bio for {username}
             </p>
