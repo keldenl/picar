@@ -65,10 +65,10 @@ export function Profile({ }) {
                     const { username, displayPicture } = userProfile;
                     return (
                         <div key={entityId}>
-                            <img src={displayPicture} />
+                            <img src={displayPicture} alt={`${username}'s profile pic`} />
                             <p>{username}</p>
                             <p>{new Date(datePosted).toLocaleTimeString()}</p>
-                            <img style={{ maxWidth: 300 }} src={data} />
+                            <img style={{ maxWidth: 300 }} src={data} alt={description} />
                             <p>{description}</p>
                         </div>
                     )
