@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BiUserPlus } from "react-icons/bi";
+import { BiEdit, BiUserPlus } from "react-icons/bi";
 
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
 import { Uploader } from '../../components/Uploader';
@@ -88,6 +88,7 @@ export function Profile({ }) {
                                 actionTitle='Update'
                                 apiPath='updateDisplayPicture'
                                 className='display-picture-uploader'
+                                icon={<BiEdit size="1.5em" />}
                                 hasDescription={false}
                                 iconOnly
                             />
@@ -98,7 +99,7 @@ export function Profile({ }) {
                         </div>
                     </div>
                     <button className="add-friend-btn" onClick={handleFriendRequest} disabled={isSendingRequest}>
-                        <BiUserPlus size="3em" />
+                        <BiUserPlus size="2.5em" />
                     </button>
                 </div>
                 {/* <p>

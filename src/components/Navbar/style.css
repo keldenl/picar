@@ -10,17 +10,23 @@
     padding-top: 20px;
 }
 
+.sidenav h1 {
+    margin-left: 40px;
+}
+
 .sidenav li,
 .sidenav a {
     padding: 8px 8px 8px 0px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 1.1em;
     color: #818181;
-    display: block;
-    transition: 0.3s;
+    transition: 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .sidenav li:hover,
 .sidenav a:hover {
-    color: #f1f1f1;
+    color: #a6a2a2;
 }

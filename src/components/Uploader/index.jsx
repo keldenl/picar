@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
 import { compressImage, toBase64 } from '../../utils';
-import { BiImage, BiX, BiImageAdd } from "react-icons/bi";
+import { BiImage, BiX, BiCloudUpload } from "react-icons/bi";
 
 import './style.css';
 
@@ -10,6 +10,7 @@ export function Uploader({
     title = "Post New Photo",
     actionTitle = "Post",
     apiPath = "upload",
+    icon,
     hasDescription = true,
     iconOnly = false,
     className,
@@ -73,7 +74,7 @@ export function Uploader({
     return (
         <div className={className}>
             <div className="add-button" onClick={() => setShowUploader(true)}>
-                <BiImageAdd size="2em" />
+                {icon != null ? icon : <BiCloudUpload size="2em" />}
                 {!iconOnly ? <span>{title}</span> : undefined}
             </div>
             {
