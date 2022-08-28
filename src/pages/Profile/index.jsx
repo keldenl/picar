@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
+import { Uploader } from '../../components/Uploader';
 import './style.css';
 
 export function Profile({ }) {
@@ -55,6 +56,8 @@ export function Profile({ }) {
     return (
         <div className="page">
             <h1>{username}</h1>
+            <Uploader title='Update Profile Picture' actionTitle='Update' apiPath='updateDisplayPicture' hasDescription={false} />
+
             <button onClick={handleFriendRequest} disabled={isSendingRequest}>Add friend</button>
             <p>
                 Bio for {username}

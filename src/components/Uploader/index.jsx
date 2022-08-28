@@ -6,9 +6,9 @@ import { BiImage, BiX, BiImageAdd } from "react-icons/bi";
 import './style.css';
 
 
-export function Uploader({ }) {
+export function Uploader({ title = "Post New Photo", actionTitle = "Post", apiPath = "upload", hasDescription = true }) {
     const [showUploader, setShowUploader] = useState(false);
-    const [uploadImg, setUploadImg] = useState([]);
+    const [uploadImg, setUploadImg] = useState();
     const [isUploading, setIsUploading] = useState(false);
     const [postDescription, setPostDescription] = useState("");
 
@@ -24,14 +24,14 @@ export function Uploader({ }) {
 
     const handlePostImage = () => {
         setIsUploading(true);
-        fetch('http://localhost:9000/upload', {
+        fetch(`http://localhost:9000/${apiPath}`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
-            body: JSON.stringify({ uploadImg, description: postDescription })
+            body: JSON.stringify({ uploadImg, ...(hasDescription ? { description: postDescription } : {}) })
         })
             .then((res) => {
                 if (res.status >= 400) {
-                    throw new Error(`${res.status} - ${res.statusText}`)
+                    throw new Error(`${res.status} ${res.statusText} - ${res.json().message}`)
                 }
                 return res.json()
             })
@@ -41,12 +41,12 @@ export function Uploader({ }) {
                 window.alert(`Image uploaded to ${json.username}`)
                 exitImageUpload();
             }).catch((err) => {
-                console.log(err);
+                console.log(err.message);
             });
     }
 
     const exitImageUpload = () => {
-        setUploadImg([]);
+        setUploadImg();
         setShowUploader(false);
     }
 
@@ -54,31 +54,34 @@ export function Uploader({ }) {
         <div>
             <div className="add-button" onClick={() => setShowUploader(true)}>
                 <BiImageAdd size="2em" />
-                <span>Upload photo</span>
+                <span>{title}</span>
             </div>
             {
                 showUploader ?
                     <div>
                         <div className="modal">
-                            <h2 className="modal-title">Post new photo</h2>
-                            <BiX size="1.75em" className="cancel-button" onClick={exitImageUpload}/>
-                            <hr className="rainbow"></hr>
+                            <h2 className="modal-title">{title}</h2>
+                            <BiX size="1.75em" className="cancel-button" onClick={exitImageUpload} />
+                            <hr className="rainbow" />
                             {
-                                uploadImg === null || uploadImg.length === 0 ?
+                                uploadImg == null || uploadImg.length === 0 ?
                                     <div className="image-selector">
-                                        <BiImage size="3em" className="image-icon"/>
+                                        <BiImage size="3em" className="image-icon" />
                                         <input className="file-input" type='file' onChange={handleUploadImage} />
                                     </div>
-                                :
+                                    :
                                     <div className="image-uploader">
                                         <div className="image-info">
                                             <img alt='preview' style={{ maxWidth: 300 }} src={uploadImg} />
-                                            <div>
-                                                <p>Write a caption</p>
-                                                <textarea value={postDescription} onChange={e => setPostDescription(e.target.value)} />
-                                            </div>
+                                            {hasDescription ?
+                                                <div>
+                                                    <p>Write a caption</p>
+                                                    <textarea value={postDescription} onChange={e => setPostDescription(e.target.value)} />
+                                                </div>
+                                                : undefined
+                                            }
                                         </div>
-                                        <button onClick={handlePostImage} disabled={isUploading}>{!isUploading ? 'Post' : 'Uploading'}</button>
+                                        <button onClick={handlePostImage} disabled={isUploading}>{!isUploading ? actionTitle : 'Uploading...'}</button>
                                     </div>
                             }
                         </div>
