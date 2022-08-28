@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
 import { Uploader } from '../../components/Uploader';
 import './style.css';
@@ -57,28 +57,38 @@ export function Profile({ }) {
         <div className="page">
             <h1>{username}</h1>
             <Uploader title='Update Profile Picture' actionTitle='Update' apiPath='updateDisplayPicture' hasDescription={false} />
-
             <button onClick={handleFriendRequest} disabled={isSendingRequest}>Add friend</button>
-            <p>
+            {/* <p>
                 Bio for {username}
-            </p>
-            {!isLoading ?
-                posts.map(post => {
-                    const { data, datePosted, description, entityId, likers, userProfile } = post;
-                    const { username, displayPicture } = userProfile;
-                    return (
-                        <div key={entityId}>
-                            <img src={displayPicture} alt={`${username}'s profile pic`} />
-                            <p>{username}</p>
-                            <p>{new Date(datePosted).toLocaleTimeString()}</p>
-                            <img style={{ maxWidth: 300 }} src={data} alt={description} />
-                            <p>{description}</p>
-                        </div>
-                    )
-                })
-                :
-                <p>Loading...</p>
-            }
+            </p> */}
+            <div className="posts-container">
+                {!isLoading ?
+                    posts.map(post => {
+                        const { data, datePosted, description, entityId, likers, userProfile } = post;
+                        const { username, displayPicture } = userProfile;
+                        return (
+                            <div className='post' key={entityId}>
+                                <Link to={`/profile/${username}`}>
+                                    <img className='image' src={data} alt={description} />
+                                </Link>
+                                <div className='post-info'>
+                                    <Link to={`/profile/${username}`}>
+                                        <div className='post-profile'>
+                                            <img className='display-picture' src={displayPicture} alt={`${username}'s profile pic`} />
+                                            <p className='username'>{username}</p>
+                                        </div>
+                                    </Link>
+                                    <p className='date'>{new Date(datePosted).toLocaleTimeString()}</p>
+                                </div>
+                                {/* <p className='description'>{description}</p> */}
+                            </div>
+                        )
+                    })
+                    :
+                    <p>Loading...</p>
+                }
+            </div>
+
         </div >
     )
 }
