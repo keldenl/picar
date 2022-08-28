@@ -21,7 +21,7 @@ export function Profile({ }) {
                 return res.json()
             })
             .then((json) => {
-                // console.log(json);
+                console.log(json);
                 setIsLoading(false);
                 setPosts(json);
             }).catch((err) => {
@@ -61,11 +61,14 @@ export function Profile({ }) {
             </p>
             {!isLoading ?
                 posts.map(post => {
-                    const { data, datePosted, description, entityId, likers, userId } = post;
+                    const { data, datePosted, description, entityId, likers, userProfile } = post;
+                    const { username, displayPicture } = userProfile;
                     return (
                         <div key={entityId}>
-                            <img style={{ maxWidth: 300 }} src={data} />
+                            <img src={displayPicture} />
+                            <p>{username}</p>
                             <p>{new Date(datePosted).toLocaleTimeString()}</p>
+                            <img style={{ maxWidth: 300 }} src={data} />
                             <p>{description}</p>
                         </div>
                     )
