@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { BiUserPlus } from "react-icons/bi";
 
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
 import { Uploader } from '../../components/Uploader';
 import './style.css';
+import { Post } from '../../components/Post';
 
 export function Profile({ }) {
     const { username } = useParams();
@@ -32,6 +33,7 @@ export function Profile({ }) {
             }).catch((err) => {
                 console.error(err);
             });
+
         fetch(`http://localhost:9000/posts/${username}`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
@@ -76,8 +78,7 @@ export function Profile({ }) {
 
     return (
         <div className="page">
-            <div className="profile-container">
-
+            <div className="page-container">
                 <div className='profile-banner'>
                     <div className="profile-banner-info">
                         <div>
@@ -105,27 +106,7 @@ export function Profile({ }) {
             </p> */}
                 <div className="posts-container">
                     {!isLoading ?
-                        posts.map(post => {
-                            const { data, datePosted, description, entityId, likers, userProfile } = post;
-                            const { username, displayPicture } = userProfile;
-                            return (
-                                <div className='post' key={entityId}>
-                                    <Link to={`/profile/${username}`}>
-                                        <img className='image' src={data} alt={description} />
-                                    </Link>
-                                    <div className='post-info'>
-                                        <Link to={`/profile/${username}`}>
-                                            <div className='post-profile'>
-                                                <img className='display-picture' src={displayPicture} alt={`${username}'s profile pic`} />
-                                                <p className='username'>{username}</p>
-                                            </div>
-                                        </Link>
-                                        <p className='date'>{new Date(datePosted).toLocaleTimeString()}</p>
-                                    </div>
-                                    {/* <p className='description'>{description}</p> */}
-                                </div>
-                            )
-                        })
+                        posts.map(postData => <Post key={postData.entityId} postData={postData} />)
                         :
                         <p>Loading...</p>
                     }

@@ -1,0 +1,51 @@
+.request {
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.request-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.request-info img {
+    max-width: 50px;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.request-info p {
+    margin: 0;
+}
+
+.request-info .request-title {
+    font-weight: 600;
+}
+
+.request-info .request-date {
+    color: gray;
+}
+
+.request-actions {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+}
+
+.request-actions>button {
+    padding-left: 10px;
+    transition: all 0.15s ease-in-out;
+}
+
+.request-actions>.request-accept:hover {
+    color: green;
+}
+
+.request-actions>.request-delete:hover {
+    color: maroon;
+}

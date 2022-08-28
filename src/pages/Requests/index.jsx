@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { BiCheck, BiTrash } from 'react-icons/bi';
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
+import { Request } from '../../components/Request';
 import './style.css';
 
 export function Requests({ }) {
@@ -89,38 +91,30 @@ export function Requests({ }) {
 
     return (
         <div className="page">
-            <h1>Friend Requests</h1>
-            <h3>Received</h3>
-            {!isReceivedLoading ?
-                receivedRequests.map(request => {
-                    const { dateRequested, userFromId, entityId } = request;
-                    return (
-                        <div key={entityId}>
-                            <p>New request from {userFromId}</p>
-                            <p>{new Date(dateRequested).toLocaleTimeString()}</p>
-                            <button onClick={() => handleAcceptRequest(entityId)}>Accept</button>
-                            <button onClick={() => handleDeleteRequest(entityId)}>Delete</button>
-                        </div>
-                    )
-                })
-                :
-                <p>Loading send requests...</p>
-            }
-            <h3>Sent</h3>
-            {!isSentLoading ?
-                sentRequests.map(request => {
-                    const { dateRequested, userToId, entityId } = request;
-                    return (
-                        <div key={entityId}>
-                            <p>Pending {userToId}'s response</p>
-                            <p>{new Date(dateRequested).toLocaleTimeString()}</p>
-                            <button onClick={() => handleDeleteRequest(entityId)}>Cancel</button>
-                        </div>
-                    )
-                })
-                :
-                <p>Loading send requests...</p>
-            }
-        </div >
+            <div className="page-container">
+                <h1>Friend Requests</h1>
+                <h3>Received</h3>
+                <div className='requests-container'>
+                    {!isReceivedLoading ?
+                        receivedRequests.length > 0 ?
+                            receivedRequests.map(requestData => <Request key={requestData.entityId} requestData={requestData} />)
+                            : 'No received requests'
+
+                        :
+                        <p>Loading received requests...</p>
+                    }
+                </div>
+                <h3>Sent</h3>
+                <div className='requests-container'>
+                    {!isSentLoading ?
+                        sentRequests.length > 0 ?
+                            sentRequests.map(requestData => <Request key={requestData.entityId} requestData={requestData} isSent />)
+                            : 'No sent requests'
+                        :
+                        <p>Loading sent requests...</p>
+                    }
+                </div>
+            </div>
+        </div>
     )
 }

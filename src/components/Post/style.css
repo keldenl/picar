@@ -1,0 +1,47 @@
+.post {
+    /* background-color: gray; */
+}
+
+.post .image {
+    max-width: 300px;
+    border-radius: 20px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: all 0.15s ease-in-out;
+}
+
+.post .image:hover {
+    opacity: 0.8;
+}
+
+.post-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    padding-top: 5px;
+}
+
+.post-info>a {
+    text-decoration: none;
+    color: unset;
+}
+
+.post-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-profile>.username {
+    font-weight: 700;
+}
+
+.post-profile>.display-picture {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+}
+
+.post-info>.date {
+    color: gray;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
-import { toBase64 } from '../../utils';
+import { compressImage, toBase64 } from '../../utils';
 import { BiImage, BiX, BiImageAdd } from "react-icons/bi";
 
 import './style.css';
@@ -23,7 +23,20 @@ export function Uploader({
     const handleUploadImage = async (e) => {
         if (e.target.files.length === 1) {
             const uploadImg = e.target.files[0];
-            const base64Img = await toBase64(uploadImg);
+            const img = await compressImage(uploadImg);
+
+
+            // img.onerror = function () {
+            //   URL.revokeObjectURL(this.src);
+            //   // Handle the failure properly
+            //   console.log("Cannot load image");
+            // };
+            // const reader = new FileReader();
+            // reader.readAsDataURL(uploadImg);
+            // reader.onload = () => console.log(compressImage(reader.result, 150));
+
+
+            const base64Img = await toBase64(img);
 
             setUploadImg(base64Img)
         }
@@ -74,7 +87,7 @@ export function Uploader({
                                 uploadImg == null || uploadImg.length === 0 ?
                                     <div className="image-selector">
                                         <BiImage size="3em" className="image-icon" />
-                                        <input className="file-input" type='file' onChange={handleUploadImage} />
+                                        <input className="file-input" type='file' accept="image/*" onChange={handleUploadImage} />
                                     </div>
                                     :
                                     <div className="image-uploader">
