@@ -6,7 +6,14 @@ import { BiImage, BiX, BiImageAdd } from "react-icons/bi";
 import './style.css';
 
 
-export function Uploader({ title = "Post New Photo", actionTitle = "Post", apiPath = "upload", hasDescription = true }) {
+export function Uploader({
+    title = "Post New Photo",
+    actionTitle = "Post",
+    apiPath = "upload",
+    hasDescription = true,
+    iconOnly = false,
+    className,
+}) {
     const [showUploader, setShowUploader] = useState(false);
     const [uploadImg, setUploadImg] = useState();
     const [isUploading, setIsUploading] = useState(false);
@@ -51,10 +58,10 @@ export function Uploader({ title = "Post New Photo", actionTitle = "Post", apiPa
     }
 
     return (
-        <div>
+        <div className={className}>
             <div className="add-button" onClick={() => setShowUploader(true)}>
                 <BiImageAdd size="2em" />
-                <span>{title}</span>
+                {!iconOnly ? <span>{title}</span> : undefined}
             </div>
             {
                 showUploader ?

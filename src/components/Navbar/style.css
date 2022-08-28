@@ -5,12 +5,13 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #fefefe;
     overflow-x: hidden;
     padding-top: 20px;
 }
 
-.sidenav li, .sidenav a {
+.sidenav li,
+.sidenav a {
     padding: 8px 8px 8px 0px;
     text-decoration: none;
     font-size: 25px;
@@ -19,6 +20,7 @@
     transition: 0.3s;
 }
 
-.sidenav li:hover, .sidenav a:hover {
+.sidenav li:hover,
+.sidenav a:hover {
     color: #f1f1f1;
 }
