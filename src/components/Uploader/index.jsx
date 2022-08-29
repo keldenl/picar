@@ -24,7 +24,7 @@ export function Uploader({
     const handleUploadImage = async (e) => {
         if (e.target.files.length === 1) {
             const uploadImg = e.target.files[0];
-            const img = await compressImage(uploadImg);
+            // const img = await compressImage(uploadImg);
 
 
             // img.onerror = function () {
@@ -37,7 +37,7 @@ export function Uploader({
             // reader.onload = () => console.log(compressImage(reader.result, 150));
 
 
-            const base64Img = await toBase64(img);
+            const base64Img = await toBase64(uploadImg);
 
             setUploadImg(base64Img)
         }

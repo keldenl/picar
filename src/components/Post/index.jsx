@@ -14,7 +14,7 @@ export function Post({ postData }) {
             <div className='post-info'>
                 <Link to={`/profile/${username}`}>
                     <div className='post-profile'>
-                        <img className='display-picture' src={displayPicture} alt={`${username}'s profile pic`} />
+                        <img className='display-picture' src={displayPicture} />
                         <p className='username'>{username}</p>
                     </div>
                 </Link>

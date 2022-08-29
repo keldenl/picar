@@ -53,7 +53,7 @@ export function Request({ requestData, isSent }) {
         <div className='request'>
             <Link to={`/profile/${username}`}>
                 <div className='request-info'>
-                    <img src={displayPicture} alt={`${username}'s display pic`} />
+                    <img src={displayPicture} />
                     <div>
                         <p className='request-title'>{isSent ? `Pending request to ${username}` : `New request from ${username}`}</p>
                         <p className='request-date'>{new Date(dateRequested).toLocaleTimeString()}</p>
