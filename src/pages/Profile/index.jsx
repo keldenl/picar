@@ -13,6 +13,7 @@ export function Profile({ }) {
     const [isSendingRequest, setIsSendingRequest] = useState(false);
     const [isFetchingFriends, setIsFetchingFriends] = useState(false);
 
+    const [isValidUser, setIsValidUser] = useState(true);
     const [user, setUser] = useState({});
 
     const [showFriendList, setShowFriendList] = useState(false);
@@ -42,9 +43,11 @@ export function Profile({ }) {
                     const { displayPicture } = userProfile;
                     setUser({ entityId, username, friendIds, displayPicture });
                 }).catch((err) => {
+                    setIsValidUser(false);
                     console.error(err);
                 });
         }
+
         const fetchUserPosts = async () => {
             return await fetch(`http://localhost:9000/posts/${username}`, {
                 method: 'GET',
@@ -92,6 +95,7 @@ export function Profile({ }) {
     }
 
     const handleShowFriendList = () => {
+        if (user.friendIds == null) return;
         setShowFriendList(true);
         setIsFetchingFriends(true);
         fetch(`http://localhost:9000/users/friends/${user.entityId}`, {
@@ -118,69 +122,77 @@ export function Profile({ }) {
     return (
         <div className="page">
             <div className="page-container">
-                {showFriendList ?
-                    <div>
-                        <div className="modal">
-                            <h2 className="modal-title">{username}'s Friends</h2>
-                            <BiX size="1.75em" className="cancel-button" onClick={handleFriendListBlur} />
-                            <hr className="rainbow" />
-                            {
-                                !isFetchingFriends ?
-                                    friendList.map(friend => {
-                                        const { displayPicture, username, entityId } = friend.userProfile;
-                                        return (
-                                            <Link key={entityId} onClick={handleFriendListBlur} to={`/profile/${username}`} >
-                                                <div className='post-profile'>
-                                                    <img className='display-picture' src={displayPicture} />
-                                                    <p className='username'>{username}</p>
-                                                </div>
-                                            </Link>
-                                        )
-                                    })
-                                    : 'Loading friends...'
+                {user.entityId != null ?
+                    <>
+                        {showFriendList ?
+                            <div>
+                                <div className="modal">
+                                    <h2 className="modal-title">{username}'s Friends</h2>
+                                    <BiX size="1.75em" className="cancel-button" onClick={handleFriendListBlur} />
+                                    <hr className="rainbow" />
+                                    {
+                                        !isFetchingFriends ?
+                                            friendList.map(friend => {
+                                                const { displayPicture, username, entityId } = friend.userProfile;
+                                                return (
+                                                    <Link key={entityId} onClick={handleFriendListBlur} to={`/profile/${username}`} >
+                                                        <div className='post-profile'>
+                                                            <img className='display-picture' src={displayPicture} />
+                                                            <p className='username'>{username}</p>
+                                                        </div>
+                                                    </Link>
+                                                )
+                                            })
+                                            : 'Loading friends...'
+                                    }
+                                </div>
+                                <div className='overlay' onClick={handleFriendListBlur}>
+                                </div>
+                            </div>
+                            :
+                            undefined
+                        }
+
+
+                        < div className='profile-banner'>
+                            <div className="profile-banner-info">
+                                <div>
+                                    <img className='main-profile-display-picture' src={user.displayPicture} />
+                                    <Uploader
+                                        title='Update Profile Picture'
+                                        actionTitle='Update'
+                                        apiPath='updateDisplayPicture'
+                                        className='display-picture-uploader'
+                                        icon={<BiEdit size="1.5em" />}
+                                        hasDescription={false}
+                                        iconOnly
+                                    />
+                                </div>
+                                <div className='main-profile-name'>
+                                    <h1>{username}</h1>
+                                    <p onClick={handleShowFriendList}>{user.friendIds != null ? user.friendIds.length : '-'} Friends</p>
+                                </div>
+                            </div>
+                            <button className="add-friend-btn" onClick={handleFriendRequest} disabled={isSendingRequest}>
+                                <BiUserPlus size="2.5em" />
+                            </button>
+                        </div>
+                        {/* <p>
+                            Bio for {username}
+                        </p> */}
+                        <div className="posts-container">
+                            {!isLoading ?
+                                posts.map(postData => <Post key={postData.entityId} postData={postData} />)
+                                :
+                                <p>Loading...</p>
                             }
                         </div>
-                        <div className='overlay' onClick={handleFriendListBlur}>
-                        </div>
-                    </div>
+                    </>
                     :
-                    undefined
+                    isValidUser ? 'Loading profile...' : 'User not found'
                 }
-
-                <div className='profile-banner'>
-                    <div className="profile-banner-info">
-                        <div>
-                            <img className='main-profile-display-picture' src={user.displayPicture} />
-                            <Uploader
-                                title='Update Profile Picture'
-                                actionTitle='Update'
-                                apiPath='updateDisplayPicture'
-                                className='display-picture-uploader'
-                                icon={<BiEdit size="1.5em" />}
-                                hasDescription={false}
-                                iconOnly
-                            />
-                        </div>
-                        <div className='main-profile-name'>
-                            <h1>{username}</h1>
-                            <p onClick={handleShowFriendList}>{user.friendIds != null ? user.friendIds.length : '-'} Friends</p>
-                        </div>
-                    </div>
-                    <button className="add-friend-btn" onClick={handleFriendRequest} disabled={isSendingRequest}>
-                        <BiUserPlus size="2.5em" />
-                    </button>
-                </div>
-                {/* <p>
-                Bio for {username}
-            </p> */}
-                <div className="posts-container">
-                    {!isLoading ?
-                        posts.map(postData => <Post key={postData.entityId} postData={postData} />)
-                        :
-                        <p>Loading...</p>
-                    }
-                </div>
             </div>
         </div >
+
     )
 }
