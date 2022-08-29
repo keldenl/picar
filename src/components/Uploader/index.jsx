@@ -3,6 +3,7 @@ import { BiImage, BiX, BiCloudUpload, BiEdit } from "react-icons/bi";
 import Resizer from "react-image-file-resizer";
 
 import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
+import { API_URL } from '../../utils';
 import './style.css';
 
 const UploadPictureUploader = {
@@ -84,7 +85,7 @@ export function Uploader({
 
     const handlePostImage = () => {
         setIsUploading(true);
-        fetch(`http://localhost:9000/${apiPath}`, {
+        fetch(`${API_URL}/${apiPath}`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
             body: JSON.stringify({ uploadImg, ...(hasDescription ? { description: postDescription } : {}) })

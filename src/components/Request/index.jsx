@@ -1,6 +1,7 @@
 import React from 'react';
 import { BiCheck, BiTrash } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../../utils';
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
 
 import './style.css';
@@ -10,7 +11,7 @@ export function Request({ requestData, isSent }) {
     const { username, displayPicture } = userProfile;
 
     const handleAcceptRequest = (requestId) => {
-        fetch('http://localhost:9000/requests/accept', {
+        fetch(`${API_URL}/requests/accept`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
             body: JSON.stringify({ requestId })
@@ -30,7 +31,7 @@ export function Request({ requestData, isSent }) {
     }
 
     const handleDeleteRequest = (requestId) => {
-        fetch('http://localhost:9000/requests/delete', {
+        fetch(`${API_URL}/requests/delete`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
             body: JSON.stringify({ requestId })

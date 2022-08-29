@@ -43,6 +43,7 @@
     align-items: center;
     gap: 5px;
     transition: 0.15s ease-in-out;
+    justify-content: flex-end;
 }
 
 .add-button:hover {

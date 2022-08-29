@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BiCheck, BiTrash } from 'react-icons/bi';
-import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
+import { API_URL } from '../../utils';
+import { DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
 import { Request } from '../../components/Request';
 import './style.css';
 
@@ -12,7 +12,7 @@ export function Requests({ }) {
     const [isReceivedLoading, setReceivedIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:9000/requests/sent`, {
+        fetch(`${API_URL}requests/sent`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
         })
@@ -31,7 +31,7 @@ export function Requests({ }) {
             });
 
 
-        fetch(`http://localhost:9000/requests/received`, {
+        fetch(`${API_URL}requests/received`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
         })
@@ -49,45 +49,6 @@ export function Requests({ }) {
                 console.error(err);
             });
     }, []);
-
-    const handleAcceptRequest = (requestId) => {
-        fetch('http://localhost:9000/requests/accept', {
-            ...DEFAULT_POST_CONFIG,
-            ...DEFAULT_FETCH_CONFIG,
-            body: JSON.stringify({ requestId })
-        })
-            .then((res) => {
-                if (res.status >= 400) {
-                    throw new Error(`${res.status} - ${res.statusText}`)
-                }
-                return res.json()
-            })
-            .then((json) => {
-                console.log(json);
-                window.alert(`You are now friends with ${json.userId}`)
-            }).catch((err) => {
-                console.log(err);
-            });
-    }
-    const handleDeleteRequest = (requestId) => {
-        fetch('http://localhost:9000/requests/delete', {
-            ...DEFAULT_POST_CONFIG,
-            ...DEFAULT_FETCH_CONFIG,
-            body: JSON.stringify({ requestId })
-        })
-            .then((res) => {
-                if (res.status >= 400) {
-                    throw new Error(`${res.status} - ${res.statusText}`)
-                }
-                return res.json()
-            })
-            .then((json) => {
-                console.log(json);
-                window.alert(`Deleted request`)
-            }).catch((err) => {
-                console.log(err);
-            });
-    }
 
     return (
         <div className="page">

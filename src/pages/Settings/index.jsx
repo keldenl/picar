@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { API_URL } from '../../utils';
 import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
-import { Navbar } from '../../components/Navbar';
 import './style.css';
 
 export function Settings({ }) {
     const [username, setUsername] = useState('');
 
     const onUpdateUser = () => {
-        fetch('http://localhost:9000/updateUsername', {
+        fetch(`${API_URL}/updateUsername`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
             body: JSON.stringify({ username })

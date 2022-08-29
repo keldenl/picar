@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BiGroup, BiHome, BiLogIn, BiUserCircle, BiWrench } from 'react-icons/bi';
 import { Link } from "react-router-dom";
+import { API_URL } from '../../utils';
 
 import './style.css';
 
@@ -9,7 +10,7 @@ export function Navbar({ }) {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        fetch('http://localhost:9000/profile', {
+        fetch(`${API_URL}/profile`, {
             method: 'GET',
             credentials: 'include'
         })

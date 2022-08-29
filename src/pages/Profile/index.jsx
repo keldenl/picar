@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BiEdit, BiUserPlus, BiX } from "react-icons/bi";
+import { BiUserPlus, BiX } from "react-icons/bi";
 
+import { API_URL } from '../../utils';
 import { DEFAULT_FETCH_CONFIG, DEFAULT_POST_CONFIG } from '../../api/middlewareConfig';
 import { Uploader } from '../../components/Uploader';
-import './style.css';
 import { Post } from '../../components/Post';
+import './style.css';
 
 export function Profile({ }) {
     const { username } = useParams();
@@ -27,7 +28,7 @@ export function Profile({ }) {
         setPosts([]);
 
         const fetchUserData = async () => {
-            return await fetch(`http://localhost:9000/users/${username}`, {
+            return await fetch(`${API_URL}/users/${username}`, {
                 method: 'GET',
                 ...DEFAULT_FETCH_CONFIG
             })
@@ -49,7 +50,7 @@ export function Profile({ }) {
         }
 
         const fetchUserPosts = async () => {
-            return await fetch(`http://localhost:9000/posts/${username}`, {
+            return await fetch(`${API_URL}/posts/${username}`, {
                 method: 'GET',
                 ...DEFAULT_FETCH_CONFIG
             })
@@ -74,7 +75,7 @@ export function Profile({ }) {
 
     const handleFriendRequest = () => {
         setIsSendingRequest(true);
-        fetch('http://localhost:9000/sendRequest', {
+        fetch(`${API_URL}/sendRequest`, {
             ...DEFAULT_POST_CONFIG,
             ...DEFAULT_FETCH_CONFIG,
             body: JSON.stringify({ reqUsername: username })
@@ -98,7 +99,7 @@ export function Profile({ }) {
         if (user.friendIds == null) return;
         setShowFriendList(true);
         setIsFetchingFriends(true);
-        fetch(`http://localhost:9000/users/friends/${user.entityId}`, {
+        fetch(`${API_URL}/users/friends/${user.entityId}`, {
             ...DEFAULT_FETCH_CONFIG,
         })
             .then((res) => {
