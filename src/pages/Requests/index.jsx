@@ -12,7 +12,7 @@ export function Requests({ }) {
     const [isReceivedLoading, setReceivedIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${API_URL}requests/sent`, {
+        fetch(`${API_URL}/requests/sent`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
         })
@@ -31,7 +31,7 @@ export function Requests({ }) {
             });
 
 
-        fetch(`${API_URL}requests/received`, {
+        fetch(`${API_URL}/requests/received`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
         })
