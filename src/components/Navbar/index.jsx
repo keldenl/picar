@@ -51,7 +51,7 @@ export function Navbar({ }) {
                     </>
                     :
                     <li>
-                        <a href="http://localhost:9000/google"><BiLogIn /> Sign In</a>
+                        <a href={`${API_URL}/google`}><BiLogIn /> Sign In</a>
                     </li>
                 }
             </ul >

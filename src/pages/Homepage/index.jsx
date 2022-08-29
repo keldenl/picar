@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
 import { Post } from '../../components/Post';
 import { Uploader } from '../../components/Uploader';
+import { API_URL } from '../../utils';
 
 import './style.css';
 
@@ -12,7 +13,9 @@ export function Homepage({ }) {
 
     useEffect(() => {
         console.log('ENV: ', process.env);
-        fetch(`http://localhost:9000/feed`, {
+        console.log('node env: ', process.env.NODE_ENV)
+        console.log('url', API_URL)
+        fetch(`${API_URL}/feed`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG
         })

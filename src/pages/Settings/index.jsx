@@ -34,7 +34,7 @@ export function Settings({ }) {
                     <button onClick={onUpdateUser}>Update Username</button>
                 </li>
                 <li>
-                    <a href="http://localhost:9000/logout">Sign out</a>
+                    <a href={`${API_URL}/logout`}>Sign out</a>
                 </li>
             </ul>
         </div>
