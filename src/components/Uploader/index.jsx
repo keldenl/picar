@@ -1,24 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
-import { compressImage, toBase64 } from '../../utils';
-import { BiImage, BiX, BiCloudUpload } from "react-icons/bi";
+import React, { useState } from 'react';
+import { BiImage, BiX, BiCloudUpload, BiEdit } from "react-icons/bi";
+import Resizer from "react-image-file-resizer";
 
+import { DEFAULT_POST_CONFIG, DEFAULT_FETCH_CONFIG } from '../../api/middlewareConfig';
 import './style.css';
 
+const UploadPictureUploader = {
+    title: "Post New Photo",
+    actionTitle: "Post",
+    apiPath: "upload",
+    icon: <BiCloudUpload size="2em" />,
+    hasDescription: true,
+    iconOnly: false,
+    maxLength: 1000,
+    quality: 85,
+
+}
+
+const DisplayPictureUploader = {
+    title: 'Update Profile Picture',
+    actionTitle: 'Update',
+    apiPath: 'updateDisplayPicture',
+    icon: <BiEdit size="1.5em" />,
+    hasDescription: false,
+    iconOnly: true,
+    maxLength: 150,
+    quality: 100,
+}
+
+const uploaderTypes = {
+    defaultUploadPicture: UploadPictureUploader,
+    displayPicture: DisplayPictureUploader,
+}
 
 export function Uploader({
-    title = "Post New Photo",
-    actionTitle = "Post",
-    apiPath = "upload",
-    icon,
-    hasDescription = true,
-    iconOnly = false,
+    type = 'defaultUploadPicture',
     className,
 }) {
+    const { title, actionTitle, apiPath, icon, hasDescription, iconOnly, maxLength, quality } = uploaderTypes[type];
     const [showUploader, setShowUploader] = useState(false);
     const [uploadImg, setUploadImg] = useState();
     const [isUploading, setIsUploading] = useState(false);
     const [postDescription, setPostDescription] = useState("");
+
+    const resizeFile = (file) =>
+        new Promise((resolve) => {
+            Resizer.imageFileResizer(
+                file,
+                maxLength,
+                maxLength,
+                "JPEG",
+                quality,
+                0,
+                (uri) => {
+                    resolve(uri);
+                },
+                "base64"
+            );
+        });
 
 
     const handleUploadImage = async (e) => {
@@ -37,7 +76,7 @@ export function Uploader({
             // reader.onload = () => console.log(compressImage(reader.result, 150));
 
 
-            const base64Img = await toBase64(uploadImg);
+            const base64Img = await resizeFile(uploadImg);
 
             setUploadImg(base64Img)
         }
@@ -92,8 +131,8 @@ export function Uploader({
                                     </div>
                                     :
                                     <div className="image-uploader">
-                                        <div className="image-info">
-                                            <img alt='preview' style={{ maxWidth: 300 }} src={uploadImg} />
+                                        <div className={`image-info ${type === 'displayPicture' ? 'display-picture-preview' : ''}`}>
+                                            <img alt='preview' src={uploadImg} />
                                             {hasDescription ?
                                                 <div>
                                                     <p>Write a caption</p>

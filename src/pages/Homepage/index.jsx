@@ -11,6 +11,7 @@ export function Homepage({ }) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
+        console.log('ENV: ', process.env);
         fetch(`http://localhost:9000/feed`, {
             method: 'GET',
             ...DEFAULT_FETCH_CONFIG

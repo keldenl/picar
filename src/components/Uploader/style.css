@@ -17,7 +17,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .rainbow {
@@ -25,7 +25,7 @@
     height: .2rem;
     margin: 1em auto;
     display: block;
-    background-image: -webkit-linear-gradient( 0deg, transparent, yellow, red, pink, purple, blue, transparent );
+    background-image: -webkit-linear-gradient(0deg, transparent, yellow, red, pink, purple, blue, transparent);
     clear: both;
 }
 
@@ -38,6 +38,15 @@
 
 .add-button {
     cursor: pointer;
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+    gap: 5px;
+    transition: 0.15s ease-in-out;
+}
+
+.add-button:hover {
+    color: #0044cc;
 }
 
 .modal-title {
@@ -47,9 +56,11 @@
 .file-input {
     color: transparent;
 }
+
 .file-input::-webkit-file-upload-button {
     visibility: hidden;
 }
+
 .file-input::before {
     content: 'Select photo';
     color: black;
@@ -66,14 +77,17 @@
     font-weight: 700;
     font-size: 10pt;
 }
+
 .file-input:hover::before {
     border-color: black;
 }
+
 .file-input:active {
     outline: 0;
 }
+
 .file-input:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
 .image-icon {
@@ -88,5 +102,19 @@
 
 .image-info {
     text-align: center;
-    margin: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.image-info>img {
+    text-align: center;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    width: 100%;
+}
+
+.display-picture-preview>img {
+    max-width: 100px;
+    border-radius: 100%;
 }

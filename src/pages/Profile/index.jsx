@@ -159,13 +159,8 @@ export function Profile({ }) {
                                 <div>
                                     <img className='main-profile-display-picture' src={user.displayPicture} />
                                     <Uploader
-                                        title='Update Profile Picture'
-                                        actionTitle='Update'
-                                        apiPath='updateDisplayPicture'
+                                        type='displayPicture'
                                         className='display-picture-uploader'
-                                        icon={<BiEdit size="1.5em" />}
-                                        hasDescription={false}
-                                        iconOnly
                                     />
                                 </div>
                                 <div className='main-profile-name'>
