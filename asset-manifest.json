@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/picar/static/css/main.2400be26.css",
-    "main.js": "/picar/static/js/main.852bc235.js",
+    "main.css": "/picar/static/css/main.640da317.css",
+    "main.js": "/picar/static/js/main.543bee30.js",
     "index.html": "/picar/index.html",
-    "main.2400be26.css.map": "/picar/static/css/main.2400be26.css.map",
-    "main.852bc235.js.map": "/picar/static/js/main.852bc235.js.map"
+    "main.640da317.css.map": "/picar/static/css/main.640da317.css.map",
+    "main.543bee30.js.map": "/picar/static/js/main.543bee30.js.map"
   },
   "entrypoints": [
-    "static/css/main.2400be26.css",
-    "static/js/main.852bc235.js"
+    "static/css/main.640da317.css",
+    "static/js/main.543bee30.js"
   ]
 }
