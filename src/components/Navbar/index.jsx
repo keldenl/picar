@@ -33,7 +33,6 @@ export function Navbar({ }) {
     /**home, profile, sign out/sign in */
     return (
         <header className='sidenav'>
-
             <ul>
                 <li>
                     <h1>Picar</h1>
@@ -49,7 +48,7 @@ export function Navbar({ }) {
                         <li>
                             <Uploader />
                         </li>
-                        
+
                         <li style={{ marginTop: 'auto' }}>
                             <Link to="/requests"><BiGroup /> Friend Requests</Link>
                         </li>
