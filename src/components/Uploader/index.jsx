@@ -108,13 +108,14 @@ export function Uploader({
 
     const exitImageUpload = () => {
         setUploadImg();
+        setPostDescription('');
         setShowUploader(false);
     }
 
     return (
         <div className={className}>
             <div className="add-button" onClick={() => setShowUploader(true)}>
-                {icon != null ? icon : <BiCloudUpload size="2em" />}
+                {icon != null ? icon : <BiCloudUpload />}
                 {!iconOnly ? <span>{title}</span> : undefined}
             </div>
             {

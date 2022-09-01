@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BiGroup, BiHome, BiLogIn, BiUserCircle, BiWrench } from 'react-icons/bi';
 import { Link } from "react-router-dom";
 import { API_URL } from '../../utils';
+import { Uploader } from '../Uploader';
 
 import './style.css';
 
@@ -32,18 +33,25 @@ export function Navbar({ }) {
     /**home, profile, sign out/sign in */
     return (
         <header className='sidenav'>
-            <h1>Picar</h1>
+
             <ul>
+                <li>
+                    <h1>Picar</h1>
+                </li>
                 <li>
                     <Link to="/"><BiHome /> Home</Link>
                 </li>
                 {isAuthenticated ?
                     <>
                         <li>
-                            <Link to="/requests"><BiGroup /> Friend Requests</Link>
+                            <Link to={`/profile/${user.username}`}><BiUserCircle /> {user.username}</Link>
                         </li>
                         <li>
-                            <Link to={`/profile/${user.username}`}><BiUserCircle /> {user.username}</Link>
+                            <Uploader />
+                        </li>
+                        
+                        <li style={{ marginTop: 'auto' }}>
+                            <Link to="/requests"><BiGroup /> Friend Requests</Link>
                         </li>
                         <li>
                             <Link to="/settings"><BiWrench /> Settings</Link>

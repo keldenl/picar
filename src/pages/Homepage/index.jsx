@@ -37,7 +37,6 @@ export function Homepage({ }) {
     return (
         <div className="page">
             <div className="page-container">
-                <Uploader />
                 <div className="posts-container">
                     {!isLoading ?
                         posts.map(postData => <Post key={postData.entityId} postData={postData} />)

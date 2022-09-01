@@ -40,6 +40,8 @@
     width: 35px;
     height: 35px;
     border-radius: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 
 .post-info>.date {
